@@ -22,38 +22,37 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'edp' ); ?></a>
+	<header class="site-header">
+		<?php get_sidebar('header'); ?>
+		<div class="site-header__bar">
+			<div class="container">
+				<hgroup>
+					<h1 class="site-header__logo"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php $edp_description = get_bloginfo( 'description', 'display' ); ?>
+					<?php if ( $edp_description ) : ?>
+						<h2 class="screen-reader-text"><?php echo $edp_description; ?></h2>
+					<?php endif; ?>
+				</hgroup>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$edp_description = get_bloginfo( 'description', 'display' );
-			if ( $edp_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $edp_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+				<button class="hamburger hamburger--collapse" type="button" aria-label="Menu" aria-controls="site-header__nav">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+					<span class="screen-reader-text">Menu Principal</span>
+				</button>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'edp' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+				<nav id="site-header__nav" class="site-header__nav">
+					<h2 class="screen-reader-text">Menu Principal</h2>
+					<div class="site-header__search">
+						<?php get_search_form(); ?>
+					</div>
+					<?php bem_menu('menu-1', 'site__header-nav'); ?>
+				</nav>
+			</div>
+		</div>
+		<div class="site-header__search site-header__search--desktop">
+			<div class="wrap">
+				<?php get_search_form(); ?>
+			</div>
+		</div>
+	</header>

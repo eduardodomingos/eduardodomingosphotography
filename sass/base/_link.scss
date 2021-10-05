@@ -1,0 +1,19 @@
+%link-silent {
+	text-decoration: none;
+	color: $color1;
+	@include attention() {
+		color: $color2;
+	}
+}
+
+a,
+.link {
+	color: $color__primary;
+	text-decoration: underline;
+	@include attention() {
+		color: lighten($color__primary, 10%);
+	}
+	&.link--silent {
+		@extend %link-silent;
+	}
+}

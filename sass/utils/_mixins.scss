@@ -1,0 +1,45 @@
+@mixin attention($self: false) {
+	@if ($self != false) {
+		&,
+		&:hover,
+		&:active,
+		&:focus {
+			@content;
+		}
+	} @else {
+		&:hover,
+		&:active,
+		&:focus {
+			@content;
+		}
+	}
+}
+
+@mixin size($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+@mixin square($size) {
+	width: $size;
+	height: $size;
+}
+
+@mixin circle($width) {
+	width: $width;
+	height: $width;
+	border-radius: $width/2;
+}
+
+@mixin icon($icon, $padding: 0, $color: inherit) {
+	&:before {
+		font-family: "icons-edp";
+		font-weight: normal;
+		font-style: normal;
+		display: inline-block;
+		line-height: 1;
+		content: $icon;
+		padding-right: $padding;
+		color: $color;
+	}
+}

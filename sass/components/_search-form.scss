@@ -1,0 +1,17 @@
+.search-form {
+	position: relative;
+	.search-form__input {
+		height: $search-form__height;
+		padding-right: $search-form__height;
+	}
+	.search-form__submit {
+		position: absolute;
+		top: 0;
+		right: 0;
+		@include square($search-form__height);
+		line-height: $search-form__height;
+		padding: 0;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+}

@@ -7,6 +7,8 @@
  * @package Eduardo_Domingos_Photography
  */
 
+define('LESSON_CATEGORIES', array('aulas' => 'aulasonline', 'workshops' => 'workshops') );
+
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
 	define( '_S_VERSION', '1.0.0' );
@@ -50,7 +52,8 @@ if ( ! function_exists( 'edp_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'edp' ),
+				'menu-1' => esc_html__( 'Principal', 'edp' ),
+				'menu-2' => esc_html__( 'Redes Sociais Footer', 'edp' ),
 			)
 		);
 
@@ -71,38 +74,34 @@ if ( ! function_exists( 'edp_setup' ) ) :
 			)
 		);
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support(
-			'custom-background',
-			apply_filters(
-				'edp_custom_background_args',
-				array(
-					'default-color' => 'ffffff',
-					'default-image' => '',
-				)
-			)
-		);
-
 		// Add theme support for selective refresh for widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
-		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
-		add_theme_support(
-			'custom-logo',
-			array(
-				'height'      => 250,
-				'width'       => 250,
-				'flex-width'  => true,
-				'flex-height' => true,
-			)
-		);
+		// Disable the new WordPress widget
+		remove_theme_support( 'widgets-block-editor' );
 	}
 endif;
 add_action( 'after_setup_theme', 'edp_setup' );
+
+/**
+ * Add preconnect for Google Fonts.
+ *
+ * @since Twenty Seventeen 1.0
+ *
+ * @param array  $urls           URLs to print for resource hints.
+ * @param string $relation_type  The relation type the URLs are printed.
+ * @return array $urls           URLs to print for resource hints.
+ */
+function edp_resource_hints( $urls, $relation_type ) {
+	if ( wp_style_is( 'edp-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+		$urls[] = array(
+			'href' => 'https://fonts.gstatic.com',
+			'crossorigin',
+		);
+	}
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'edp_resource_hints', 10, 2 );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -127,10 +126,30 @@ function edp_widgets_init() {
 			'name'          => esc_html__( 'Sidebar', 'edp' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here.', 'edp' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
+			'before_widget' => '<div class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widget__title">',
 			'after_title'   => '</h2>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Header', 'edp' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Add widgets here.', 'edp' ),
+			'before_widget' => '',
+			'after_widget'  => ''
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Footer', 'edp' ),
+			'id'            => 'sidebar-3',
+			'description'   => esc_html__( 'Add widgets here.', 'edp' ),
+			'before_widget' => '',
+			'after_widget'  => ''
 		)
 	);
 }
@@ -140,10 +159,9 @@ add_action( 'widgets_init', 'edp_widgets_init' );
  * Enqueue scripts and styles.
  */
 function edp_scripts() {
-	wp_enqueue_style( 'edp-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'edp-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'edp-fonts', '//fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400&display=swap' );
 
-	wp_enqueue_script( 'edp-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_style( 'edp-style', get_stylesheet_uri(), array(), _S_VERSION );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -178,3 +196,22 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Disable Editor.
+ */
+require get_template_directory() . '/inc/disable-editor.php';
+
+/**
+ * BEM Menus.
+ */
+require get_template_directory() . '/inc/wp_bem_menu.php';
+
+/**
+ * Load custom widgets
+ */
+require get_template_directory() . "/widgets/recent-posts-enhanced.php";
+
+/**
+ * Modules for this theme.
+ */
+require get_template_directory() . '/inc/modules.php';

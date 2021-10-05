@@ -1,0 +1,31 @@
+// Container
+$container__max-width: 1200px;
+
+// Border
+$border__radius: $unit1 / 2;
+
+// Site Header
+$site-header__height: $unit10;
+
+// Search Form
+$search-form__height: $unit5;
+
+// Hamburger
+$hamburger-layer-width: 20px;
+$hamburger-layer-height: 2px;
+$hamburger-layer-color: $color1;
+$hamburger-layer-spacing: 4px;
+$hamburger-types: (collapse);
+
+// Hero
+$hero__height: 50 * $unit1; // 400px
+
+// Teaser
+$teaser__thumbnail-width: 220px;
+$teaser__thumbnail-width--sidebar: $unit10;
+
+// Sidebar
+$sidebar__width: 250px;
+
+// Author
+$author__thumbnail-width: 32px;

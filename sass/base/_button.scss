@@ -1,0 +1,42 @@
+%button {
+	font-size: inherit;
+	display: inline-block;
+	border: 1px solid $color__primary;
+	border-radius: $border__radius;
+	background: $color__primary;
+	color: white;
+	padding: 1.5 * $unit1;
+	cursor: pointer;
+	text-shadow: none;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: 700;
+	line-height: inherit;
+	text-align: center;
+	@include attention() {
+		color: white;
+		background-color: lighten($color__primary, 10%);
+	}
+}
+
+button,
+.button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	@extend %button;
+	&.button--secondary {
+		background-color: transparent;
+		color: $color__text;
+		border-color: $color__text;
+		@include attention() {
+			color: $color__primary;
+			border-color: $color__primary;
+			background-color: transparent;
+		}
+	}
+	&.button--fat {
+		padding-left: $unit3;
+		padding-right: $unit3;
+	}
+}

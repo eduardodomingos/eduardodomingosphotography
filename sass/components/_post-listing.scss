@@ -1,0 +1,23 @@
+.post-listing {
+	.post-listing__list {
+		display: grid;
+		grid-gap: $unit2;
+		@include mq($from: desktop) {
+			grid-gap: $unit4;
+		}
+		&.post-listing__list--2up {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		&.post-listing__list--3up {
+			@include mq($from: tablet) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+		&.post-listing__list--4up {
+			grid-template-columns: repeat(2, 1fr);
+			@include mq($from: tablet) {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+.section {
+	padding-top: $unit6;
+	padding-bottom: $unit6;
+	.section__header {
+		> div {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: $unit2;
+			&::after {
+				content: "";
+				height: 1px;
+				width: 100%;
+				background-color: $color9;
+				margin: 0 $unit2;
+				order: 2;
+			}
+		}
+	}
+	.section__title {
+		font-size: 20px;
+		text-transform: uppercase;
+		order: 1;
+		flex-shrink: 0;
+		@include mq($from: tablet) {
+			font-size: 22px;
+		}
+		@include mq($from: desktop) {
+			font-size: 24px;
+		}
+	}
+	.section__link {
+		font-size: 14px;
+		display: block;
+		order: 3;
+		flex-shrink: 0;
+		min-width: 150px;
+		@include mq($until: tablet) {
+			display: none;
+		}
+	}
+}
