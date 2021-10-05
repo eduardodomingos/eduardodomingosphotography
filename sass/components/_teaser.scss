@@ -1,0 +1,56 @@
+.teaser {
+	position: relative;
+	.teaser__thumbnail {
+		display: block;
+		border-radius: $border__radius;
+		overflow: hidden;
+		margin-bottom: $unit1;
+	}
+	.teaser__category {
+		font-size: 13px;
+		text-transform: uppercase;
+		margin-bottom: $unit1/2;
+		a {
+			@extend %link-silent;
+		}
+	}
+
+	.teaser__price {
+		.price-tag__discount {
+			@include mq($until: desktop) {
+				position: absolute;
+				top: $unit1/2;
+				left: $unit1/2;
+			}
+		}
+	}
+
+	.teaser__title {
+		font-size: 16px;
+		margin-bottom: $unit1;
+		text-transform: none;
+	}
+
+	.teaser__summary {
+		font-size: 14px;
+		line-height: 1.35;
+		@include mq($from: desktop) {
+			line-height: 1.45;
+		}
+	}
+
+	.post-listing__list--2up & {
+		@include mq($from: desktop) {
+			position: relative;
+			padding-left: $teaser__thumbnail-width + $unit3;
+			min-height: $teaser__thumbnail-width * 2/3;
+			.teaser__thumbnail {
+				width: $teaser__thumbnail-width;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin-bottom: 0;
+			}
+		}
+	}
+}

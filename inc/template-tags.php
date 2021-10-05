@@ -119,21 +119,21 @@ if ( ! function_exists( 'edp_post_thumbnail' ) ) :
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
 	 */
-	function edp_post_thumbnail() {
+	function edp_post_thumbnail($cssClasses=array('post__thumbnail'), $show_link = false) {
 		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 			return;
 		}
 
-		if ( is_singular() ) :
+		if ( !$show_link ) :
 			?>
 
-			<div class="post-thumbnail">
+			<div class="<?php echo join( ' ', $cssClasses ); ?>">
 				<?php the_post_thumbnail(); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
 
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
+			<a class="<?php echo join( ' ', $cssClasses ); ?>" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
 				<?php
 					the_post_thumbnail(
 						'post-thumbnail',
@@ -161,5 +161,92 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	 */
 	function wp_body_open() {
 		do_action( 'wp_body_open' );
+	}
+endif;
+
+if ( ! function_exists( 'edp_post_bottom_category' ) ) :
+	/**
+	 * Prints HTML with a link for the bottom post category.
+	 */
+	function edp_post_bottom_category($cssClasses = array('post__category')) {
+		$terms = get_the_category();
+		if ( ! is_array( $terms ) || empty( $terms ) ) {
+			return false;
+		}
+		$filter = function($terms) use (&$filter) {
+			$return_terms = array();
+			$term_ids = array();
+			foreach ($terms as $t){
+				$term_ids[] = $t->term_id;
+			}
+			foreach ( $terms as $t ) {
+				if( $t->parent == false || !in_array($t->parent,$term_ids) )  {
+					//remove this term
+				}
+				else{
+					$return_terms[] = $t;
+				}
+			}
+	
+			if( count($return_terms) ){
+				return $filter($return_terms);  
+			}
+			else {
+				return $terms;
+			}
+		};
+		$bottom_category_obj = $filter($terms)[0];
+		$bottom_category_obj_link = '<a href="' . esc_url(get_category_link( $bottom_category_obj->term_id )) . '">' . esc_html($bottom_category_obj->name) . '</a>';
+		echo sprintf( '<p class="'.join( ' ', $cssClasses ).'">' . esc_html__( '%1$sPublicado em%2$s %3$s', 'edp' ) . '</p>', '<span class="screen-reader-text">', '</span>', $bottom_category_obj_link ); // WPCS: XSS OK.
+	}
+endif;
+
+if ( ! function_exists( 'edp_price_tag' ) ) :
+	/**
+	 * Prints HTML with a link for the bottom post category.
+	 */
+	function edp_price_tag($cssClasses = array(), $show_promo_info) {
+		$price = get_field('price',false,false);
+		$duration = get_field('duration');
+		$promotion = get_field('promotion');
+		$promotion_name = $promotion['promotion_name'];
+		$promotion_value = $promotion['promotion_value'];
+		$promotion_expiry_date = DateTime::createFromFormat('Ymd', $promotion['promotion_expiry_date']);
+
+		if($price) {
+			if($promotion_value && edp_discount_is_valid($promotion_expiry_date)) {
+				$old_price = $price;
+				$price = round($price - ($price * ($promotion_value/100)), 1);
+			}
+			$old_price.='€';
+			$price.='€';
+		}
+		else {
+			$price = 'Preço sob consulta';
+		}
+		?>
+		<div class="<?php echo join( ' ', $cssClasses )?> price-tag">
+			<div class="price-tag__price">
+				<?php if($promotion_value && edp_discount_is_valid($promotion_expiry_date)): ?>
+					<span class="price-tag__discount">- <?php echo $promotion_value; ?>%</span>
+				<?php endif;?>
+				<?php if($old_price): ?>
+					<s><?php echo $old_price; ?></s>
+				<?php endif;?>
+				<span><?php echo $price; ?></span>
+			</div>
+			<?php if($duration): ?>
+				<div class="price-tag__duration"><?php echo $duration; ?></div>
+			<?php endif;?>
+		</div>
+		<?php
+	}
+
+	function edp_discount_is_valid($expiry_date) {
+		$today = new DateTime();
+		if( $expiry_date >= $today) {
+		 	return true;
+		}
+		return false;
 	}
 endif;

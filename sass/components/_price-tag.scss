@@ -1,0 +1,17 @@
+.price-tag {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: $unit1;
+	.price-tag__discount {
+		@extend %highlight;
+		font-size: 90%;
+	}
+
+	.price-tag__price {
+		margin-right: 1.5 * $unit1;
+	}
+	.price-tag__duration {
+		@include icon("\e803", $unit1/2);
+	}
+}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name: Eduardo Domingos Photography
 Theme URI: http://underscores.me/
@@ -327,7 +328,7 @@ h2 > a,
 h3 > a,
 h4 > a,
 h5 > a,
-h6 > a {
+h6 > a, .teaser .teaser__category a {
 	text-decoration: none;
 	color: #002333;
 }
@@ -338,19 +339,19 @@ h2 > a:hover,
 h3 > a:hover,
 h4 > a:hover,
 h5 > a:hover,
-h6 > a:hover, a.link--silent:active,
+h6 > a:hover, .teaser .teaser__category a:hover, a.link--silent:active,
 .link.link--silent:active, h1 > a:active,
 h2 > a:active,
 h3 > a:active,
 h4 > a:active,
 h5 > a:active,
-h6 > a:active, a.link--silent:focus,
+h6 > a:active, .teaser .teaser__category a:active, a.link--silent:focus,
 .link.link--silent:focus, h1 > a:focus,
 h2 > a:focus,
 h3 > a:focus,
 h4 > a:focus,
 h5 > a:focus,
-h6 > a:focus {
+h6 > a:focus, .teaser .teaser__category a:focus {
 	color: #ec008c;
 }
 
@@ -546,9 +547,86 @@ img {
 	vertical-align: middle;
 }
 
+@font-face {
+	font-family: "icons-edp";
+	src: url("assets/icons/icons-edp.eot?65691747");
+	src: url("assets/icons/icons-edp.eot?65691747#iefix") format("embedded-opentype"), url("assets/icons/icons-edp.woff2?65691747") format("woff2"), url("assets/icons/icons-edp.woff?65691747") format("woff"), url("assets/icons/icons-edp.ttf?65691747") format("truetype"), url("assets/icons/icons-edp.svg?65691747#icons-edp") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+	font-family: "icons-edp";
+	font-style: normal;
+	font-weight: normal;
+	speak: never;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	text-align: center;
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+}
+
+.icon-search:before {
+	content: "\e800";
+}
+
+/* '' */
+.icon-mail:before {
+	content: "\e801";
+}
+
+/* '' */
+.icon-ok-circled2:before {
+	content: "\e802";
+}
+
+/* '' */
+.icon-clock:before {
+	content: "\e803";
+}
+
+/* '' */
+.icon-twitter:before {
+	content: "\f099";
+}
+
+/* '' */
+.icon-minus-squared-alt:before {
+	content: "\f147";
+}
+
+/* '' */
+.icon-youtube-play:before {
+	content: "\f16a";
+}
+
+/* '' */
+.icon-instagram:before {
+	content: "\f16d";
+}
+
+/* '' */
+.icon-plus-squared-alt:before {
+	content: "\f196";
+}
+
+/* '' */
+.icon-facebook:before {
+	content: "\f30c";
+}
+
+/* '' */
 .section {
 	padding-top: 48px;
 	padding-bottom: 48px;
+}
+
+.section .section__header {
+	margin-bottom: 24px;
 }
 
 .section .section__header > div {
@@ -748,6 +826,97 @@ img {
 	.post-listing .post-listing__list.post-listing__list--4up {
 		grid-template-columns: repeat(4, 1fr);
 	}
+}
+
+.teaser {
+	position: relative;
+}
+
+.teaser .teaser__thumbnail {
+	display: block;
+	border-radius: 4px;
+	overflow: hidden;
+	margin-bottom: 8px;
+}
+
+.teaser .teaser__category {
+	font-size: 13px;
+	text-transform: uppercase;
+	margin-bottom: 4px;
+}
+
+@media (max-width: 61.24em) {
+	.teaser .teaser__price .price-tag__discount {
+		position: absolute;
+		top: 4px;
+		left: 4px;
+	}
+}
+
+.teaser .teaser__title {
+	font-size: 16px;
+	margin-bottom: 8px;
+	text-transform: none;
+}
+
+.teaser .teaser__summary {
+	font-size: 14px;
+	line-height: 1.35;
+}
+
+@media (min-width: 61.25em) {
+	.teaser .teaser__summary {
+		line-height: 1.45;
+	}
+}
+
+@media (min-width: 61.25em) {
+	.post-listing__list--2up .teaser {
+		position: relative;
+		padding-left: 244px;
+		min-height: 146.66667px;
+	}
+	.post-listing__list--2up .teaser .teaser__thumbnail {
+		width: 220px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin-bottom: 0;
+	}
+}
+
+.price-tag .price-tag__discount {
+	background: #ffe921;
+	color: #002333;
+	padding: 2px 4px;
+	font-weight: bold;
+	border-radius: 4px;
+}
+
+.price-tag {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.price-tag .price-tag__discount {
+	font-size: 90%;
+}
+
+.price-tag .price-tag__price {
+	margin-right: 12px;
+}
+
+.price-tag .price-tag__duration:before {
+	font-family: "icons-edp";
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	line-height: 1;
+	content: "";
+	padding-right: 4px;
+	color: inherit;
 }
 
 /*# sourceMappingURL=style.css.map */

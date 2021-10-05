@@ -1,0 +1,57 @@
+@font-face {
+	font-family: "icons-edp";
+	src: url("assets/icons/icons-edp.eot?65691747");
+	src: url("assets/icons/icons-edp.eot?65691747#iefix")
+			format("embedded-opentype"),
+		url("assets/icons/icons-edp.woff2?65691747") format("woff2"),
+		url("assets/icons/icons-edp.woff?65691747") format("woff"),
+		url("assets/icons/icons-edp.ttf?65691747") format("truetype"),
+		url("assets/icons/icons-edp.svg?65691747#icons-edp") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+	font-family: "icons-edp";
+	font-style: normal;
+	font-weight: normal;
+	speak: never;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	text-align: center;
+	/* For safety - reset parent styles, that can break glyph codes*/
+	font-variant: normal;
+	text-transform: none;
+}
+.icon-search:before {
+	content: "\e800";
+} /* '' */
+.icon-mail:before {
+	content: "\e801";
+} /* '' */
+.icon-ok-circled2:before {
+	content: "\e802";
+} /* '' */
+.icon-clock:before {
+	content: "\e803";
+} /* '' */
+.icon-twitter:before {
+	content: "\f099";
+} /* '' */
+.icon-minus-squared-alt:before {
+	content: "\f147";
+} /* '' */
+.icon-youtube-play:before {
+	content: "\f16a";
+} /* '' */
+.icon-instagram:before {
+	content: "\f16d";
+} /* '' */
+.icon-plus-squared-alt:before {
+	content: "\f196";
+} /* '' */
+.icon-facebook:before {
+	content: "\f30c";
+} /* '' */

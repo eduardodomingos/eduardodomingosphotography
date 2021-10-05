@@ -7,7 +7,7 @@
  * @package Eduardo_Domingos_Photography
  */
 
-define('LESSON_CATEGORIES', array('aulas' => 'aulasonline', 'workshops' => 'workshops') );
+define('LESSON_CATEGORIES', array('lessons' => 'aulasonline', 'workshops' => 'workshops') );
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.

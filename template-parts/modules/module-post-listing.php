@@ -19,7 +19,7 @@ if($list_type === 'latest') {
         $link_url = get_category_link($limit_by_category);
         $link_label = get_cat_name($limit_by_category);
     } else {
-        $onlineLessonsCatID = get_category_by_slug(LESSON_CATEGORIES['aulas'])->term_id;
+        $onlineLessonsCatID = get_category_by_slug(LESSON_CATEGORIES['lessons'])->term_id;
         $workshopsCatID = get_category_by_slug(LESSON_CATEGORIES['workshops'])->term_id;
         $query_args['category__not_in'] = array($onlineLessonsCatID, $workshopsCatID);
         $link_url = get_permalink( get_option( 'page_for_posts' ) );
