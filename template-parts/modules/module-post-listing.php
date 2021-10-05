@@ -34,7 +34,7 @@ if($list_type === 'latest') {
 }
 
 ?>
-<div class="section post-listing container">
+<section class="section post-listing container">
     <header class="section__header">
         <div>
             <?php if($title): ?>
@@ -71,4 +71,4 @@ if($list_type === 'latest') {
         ?>
         </ul>
     <?php endif;?>
-</div>
+</section>

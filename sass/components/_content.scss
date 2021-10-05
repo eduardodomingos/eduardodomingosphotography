@@ -1,0 +1,10 @@
+.site-content {
+	padding-top: $unit5;
+	.content-sidebar & {
+		@include mq($from: desktop) {
+			display: grid;
+			grid-template-columns: 1fr $sidebar__width;
+			grid-column-gap: $unit5;
+		}
+	}
+}

@@ -36,10 +36,7 @@ function edp_module( $module = array(), $i = false ) {
 			break;
 
 		case 'post_listing':
-			// edp_module_header( $module );
 			edp_get_template_part('template-parts/modules/module', 'post-listing', array('data' => $module));
-			//ea_module_header( $module );
-			//echo '<div class="entry-content">' . apply_filters( 'ea_the_content', $module['content'] ) . '</div>';
 			break;
 	}
 	//edp_module_close( $module, $i );

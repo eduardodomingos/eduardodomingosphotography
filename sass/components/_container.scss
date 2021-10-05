@@ -3,4 +3,8 @@
 	margin: 0 auto;
 	padding-left: $unit2;
 	padding-right: $unit2;
+	.content-sidebar .site-main & {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }

@@ -53,4 +53,25 @@
 			}
 		}
 	}
+	.sidebar & {
+		position: relative;
+		padding-left: $teaser__thumbnail-width--sidebar + $unit2;
+		min-height: $teaser__thumbnail-width--sidebar;
+		.teaser__thumbnail {
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin-bottom: 0;
+			img {
+				@include square($teaser__thumbnail-width--sidebar);
+				object-fit: cover;
+			}
+		}
+		.teaser__title {
+			font-size: 14px;
+		}
+		.teaser__summary {
+			display: none;
+		}
+	}
 }

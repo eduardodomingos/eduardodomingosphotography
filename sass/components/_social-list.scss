@@ -1,0 +1,60 @@
+.social__list {
+	display: flex;
+	flex-wrap: wrap;
+	.social__item {
+		&:not(:last-child) {
+			margin-right: $unit1;
+		}
+		&.social__item--email .social__link {
+			@include icon("\e801");
+		}
+		&.social__item--facebook .social__link {
+			@include icon("\f30c");
+			background-color: $color7;
+			@include attention() {
+				background-color: lighten($color7, 10%);
+			}
+		}
+		&.social__item--youtube .social__link {
+			@include icon("\f16a");
+			background-color: $color4;
+			@include attention() {
+				background-color: lighten($color4, 10%);
+			}
+		}
+		&.social__item--twitter .social__link {
+			@include icon("\f099");
+			background-color: $color6;
+			@include attention() {
+				background-color: lighten($color6, 10%);
+			}
+		}
+		&.social__item--instagram .social__link {
+			@include icon("\f16d");
+			background-color: $color5;
+			@include attention() {
+				background-color: lighten($color5, 10%);
+			}
+		}
+
+		.social__link {
+			color: white;
+			background-color: black;
+			display: inline-block;
+			overflow: hidden;
+			text-indent: -9999px;
+			@include circle($unit5);
+			font-size: 17px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			@include attention() {
+				background-color: lighten(black, 10%);
+			}
+			&::before {
+				float: left;
+				text-indent: 0;
+			}
+		}
+	}
+}

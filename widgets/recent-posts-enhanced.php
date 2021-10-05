@@ -23,30 +23,30 @@ class edp_recent_posts extends WP_Widget {
 			echo $before_title . esc_html__( 'Recent Posts', 'edp' ) . $after_title;
 		}
 		?>
+			<div class="post-listing">
+				<ul class="post-listing__list">
+					<?php
+						if ( $number_of_posts == 0 ) $number_of_posts = 5;
+						$onlineLessosCatID = get_category_by_slug('aulasonline')->term_id;
+						$workshopsCatID = get_category_by_slug('workshops')->term_id;
+						$recent_posts = new WP_Query( apply_filters(
+						'edp_recent_posts_args', array(
+								'posts_per_page'      => $number_of_posts,
+								'post_status'         => 'publish',
+								'ignore_sticky_posts' => true,
+								'category__not_in' => array($onlineLessosCatID, $workshopsCatID)
+						) ) );
+						if ($recent_posts->have_posts()) :
+							while ( $recent_posts->have_posts() ) : $recent_posts->the_post(); ?>
 
-			<ul class="widget-recent-posts__list widget__list">
+							<li class="post-listing__item">
+								<?php  edp_get_template_part('template-parts/content', 'teaser', array()); ?>
+							</li>
 
-				<?php
-					if ( $number_of_posts == 0 ) $number_of_posts = 5;
-                    $onlineLessosCatID = get_category_by_slug('aulasonline')->term_id;
-                    $workshopsCatID = get_category_by_slug('workshops')->term_id;
-                    $recent_posts = new WP_Query( apply_filters(
-					'edp_recent_posts_args', array(
-					        'posts_per_page'      => $number_of_posts,
-					        'post_status'         => 'publish',
-					        'ignore_sticky_posts' => true,
-                            'category__not_in' => array($onlineLessosCatID, $workshopsCatID)
-					) ) );
-					if ($recent_posts->have_posts()) :
-						while ( $recent_posts->have_posts() ) : $recent_posts->the_post(); ?>
+						<?php endwhile; ?>
 
-						<li class="widget-recent-posts__item">
-                            <?php  edp_get_template_part('template-parts/content', 'teaser', array()); ?>
-						</li>
-
-					<?php endwhile; ?>
-
-				</ul>
+					</ul>
+				</div>
 
 			<?php endif; ?>
 

@@ -18,12 +18,15 @@ foreach((get_the_category()) as $category) {
 <article class="<?php echo join( ' ', $cssClasses ); ?>">
 	<?php edp_post_thumbnail(array('teaser__thumbnail'), true); ?>
 
-	<?php edp_price_tag(array('teaser__price'), false)?>
+	<?php if(has_category(array(LESSON_CATEGORIES['lessons'], LESSON_CATEGORIES['workshops']))): ?>
+		<?php edp_price_tag(array('teaser__price'), false)?>
+	<?php endif; ?>
 
 	<?php if(!has_category(array(LESSON_CATEGORIES['lessons'], LESSON_CATEGORIES['workshops']))): ?>
 		<?php edp_post_bottom_category(array('teaser__category'))?>
 	<?php endif; ?>
-	<?php the_title( '<h2 class="teaser__title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+	
+	<?php the_title( '<h3 class="teaser__title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' ); ?>
 	<?php if(get_field('summary')): ?>
 		<p class="teaser__summary"><?php the_field('summary'); ?></p>
 	<?php endif; ?>

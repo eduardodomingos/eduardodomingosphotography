@@ -1,0 +1,13 @@
+.widget {
+	.sidebar & {
+		.widget__title {
+			text-transform: uppercase;
+			font-size: 17px;
+			margin-bottom: $unit3;
+		}
+		.widget__list {
+			display: grid;
+			grid-gap: $unit3;
+		}
+	}
+}

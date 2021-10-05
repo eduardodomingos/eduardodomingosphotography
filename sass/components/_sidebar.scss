@@ -1,0 +1,9 @@
+.sidebar {
+	@include mq($until: desktop) {
+		display: none;
+	}
+	.sidebar__inner {
+		position: sticky;
+		top: $unit6;
+	}
+}

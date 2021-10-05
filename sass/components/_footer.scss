@@ -1,0 +1,25 @@
+.site-footer {
+	background-color: $color12;
+	color: white;
+	padding: $unit5 0;
+	font-size: 14px;
+	> .container {
+		display: grid;
+		grid-gap: $unit3;
+		@include mq($from: tablet) {
+			grid-gap: $unit4;
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	.social__list {
+		margin-top: $unit1;
+	}
+	.site-footer__copyright {
+		align-self: end;
+		opacity: 0.5;
+		font-size: 95%;
+		@include mq($from: tablet) {
+			text-align: right;
+		}
+	}
+}

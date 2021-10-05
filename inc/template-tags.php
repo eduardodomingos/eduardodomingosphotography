@@ -11,27 +11,21 @@ if ( ! function_exists( 'edp_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 */
-	function edp_posted_on() {
-		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+	function edp_posted_on($classes = array()) {
+		$classes[] = 'post__date';
+		$time_string = '<time class="published updated" datetime="%1$s">%2$s</time>';
 		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			$time_string = '<time class="published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 		}
 
-		$time_string = sprintf(
-			$time_string,
+		$time_string = sprintf( $time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
-			esc_html( get_the_date() ),
+			'há ' .human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ),
 			esc_attr( get_the_modified_date( DATE_W3C ) ),
-			esc_html( get_the_modified_date() )
+			'há ' . human_time_diff( get_the_modified_time( 'U' ), current_time( 'timestamp' ) )
 		);
 
-		$posted_on = sprintf(
-			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'edp' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-		);
-
-		echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo ' <span class="'.join( ' ', $classes ).'">'. $time_string . '</span>'; // WPCS: XSS OK.
 
 	}
 endif;
@@ -42,13 +36,16 @@ if ( ! function_exists( 'edp_posted_by' ) ) :
 	 */
 	function edp_posted_by() {
 		$byline = sprintf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'edp' ),
+			esc_html_x( '%1$sPublicado por%2$s %3$s', 'post author', 'edp' ),
+			'<span class="screen-reader-text">',
+			'</span>',
 			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 		);
-
-		echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
+		echo '<div class="post__author">';
+		echo get_avatar( get_the_author_meta( 'ID' ), 32 );
+		echo $byline; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '</div>';
+	
 	}
 endif;
 
@@ -248,5 +245,98 @@ if ( ! function_exists( 'edp_price_tag' ) ) :
 		 	return true;
 		}
 		return false;
+	}
+endif;
+
+if ( ! function_exists( 'edp_post_tags' ) ) :
+	/**
+	 * Prints HTML with meta information for the tags.
+	 */
+	function edp_post_tags() {
+		/* translators: used between list items, there is a space after the comma */
+		$tags_list = get_the_tag_list('',' ');
+		if ( $tags_list ) {
+			?>
+			<p class="post__tags"><span class="screen-reader-text">Etiquetas</span> <?php echo $tags_list?></p>
+			<?php
+		}
+	}
+endif;
+
+if ( ! function_exists( 'edp_share_this' ) ) :
+	/**
+	 * Displays the share buttons.
+	 */
+	function edp_share_this() {
+		$url = urlencode(get_the_permalink());
+		$title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
+		?>
+		<div class="post__share">
+			<p>Partilhe:</p>
+			<ul class="social__list">
+				<li class="social__item social__item--facebook">
+					<a class="social__link" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $url; ?>" title="Partilhar no Facebook">
+						<span class="screen-reader-text">Partilhar no Facebook</span>
+					</a>
+				</li>
+				<li class="social__item social__item--twitter">
+					<a class="social__link" href="https://twitter.com/intent/tweet?text=<?php echo $title; ?>&amp;url=<?php echo $url; ?>&amp;via=amaedoandre" title="Partilhar no Twitter">
+						<span class="screen-reader-text">Partilhar no Twitter</span>
+					</a>
+				</li>
+				<li class="social__item social__item--email">
+					<a class="social__link" href="mailto:?subject=<?php echo rawurlencode(get_the_title()); ?>&amp;body=Acabei de ler este artigo no blog A Mãe do André: <?php echo $url; ?>" title="Enviar por email">
+						<span class="screen-reader-text">Enviar por email</span>
+					</a>
+				</li>
+			</ul>
+			
+		</div>
+	<?php
+	}
+endif;
+
+
+if ( ! function_exists( 'edp_get_latest_posts' ) ) :
+	/**
+	 * Displays an optional post thumbnail.
+	 *
+	 * Wraps the post thumbnail in an anchor element on index views, or a div
+	 * element when on single views.
+	 */
+	function edp_get_latest_posts_from_category($number_of_posts = 3) {
+		$cats = get_the_category();
+		$top_cat_obj = array();
+
+		foreach($cats as $cat) {
+			if ($cat->parent == 0) {
+				$top_cat_obj[] = $cat;  
+			}
+		}
+		$top_cat_obj = $top_cat_obj[0];
+		$catName = $top_cat_obj -> name;
+		$catID = $top_cat_obj -> cat_ID;
+
+		// $title = $data['title'];
+		// $description = $data['description'];
+		// $list_type = $data['list_type'];
+		// $limit_by_category = $data['limit_by_category'];
+		// $featured_posts = $data['featured_posts'];
+		// $layout = $data['layout'];
+		// $posts_per_page = $data['posts_per_page'];
+
+		$data = array(
+			'title' => '+ ' . $catName,
+			'description' => 'Artigos mais recentes na categoria ' . $catName,
+			'list_type' => 'latest',
+			'limit_by_category' => $catID,
+			'layout' => 3,
+			'posts_per_page' => $number_of_posts
+		);
+
+
+		// echo '<section class="section post-listing">';
+		edp_get_template_part('template-parts/modules/module', 'post-listing', array('data' => $data));
+		// echo '</section>';
 	}
 endif;
