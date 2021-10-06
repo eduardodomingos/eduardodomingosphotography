@@ -1,3 +1,14 @@
+%section-title {
+	@extend %headings;
+	font-size: 20px;
+	@include mq($from: tablet) {
+		font-size: 22px;
+	}
+	@include mq($from: desktop) {
+		font-size: 24px;
+	}
+}
+
 .section {
 	padding-top: $unit6;
 	padding-bottom: $unit6;
@@ -19,16 +30,9 @@
 		}
 	}
 	.section__title {
-		font-size: 20px;
-		text-transform: uppercase;
+		@extend %section-title;
 		order: 1;
 		flex-shrink: 0;
-		@include mq($from: tablet) {
-			font-size: 22px;
-		}
-		@include mq($from: desktop) {
-			font-size: 24px;
-		}
 	}
 	.section__link {
 		font-size: 14px;
@@ -39,5 +43,8 @@
 		@include mq($until: tablet) {
 			display: none;
 		}
+	}
+	&--bordered {
+		border-top: 1px solid $color__divider;
 	}
 }

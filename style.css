@@ -448,7 +448,7 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6, .section .section__title, .comments .comments__counter {
 	font-weight: bold;
 	line-height: 1.3;
 	text-transform: uppercase;
@@ -620,6 +620,22 @@ img {
 }
 
 /* '' */
+.section .section__title, .comments .comments__counter {
+	font-size: 20px;
+}
+
+@media (min-width: 48em) {
+	.section .section__title, .comments .comments__counter {
+		font-size: 22px;
+	}
+}
+
+@media (min-width: 61.25em) {
+	.section .section__title, .comments .comments__counter {
+		font-size: 24px;
+	}
+}
+
 .section {
 	padding-top: 48px;
 	padding-bottom: 48px;
@@ -646,22 +662,8 @@ img {
 }
 
 .section .section__title {
-	font-size: 20px;
-	text-transform: uppercase;
 	order: 1;
 	flex-shrink: 0;
-}
-
-@media (min-width: 48em) {
-	.section .section__title {
-		font-size: 22px;
-	}
-}
-
-@media (min-width: 61.25em) {
-	.section .section__title {
-		font-size: 24px;
-	}
 }
 
 .section .section__link {
@@ -676,6 +678,10 @@ img {
 	.section .section__link {
 		display: none;
 	}
+}
+
+.section--bordered {
+	border-top: 1px solid #dcdee1;
 }
 
 .container {
@@ -1264,6 +1270,10 @@ img {
 .social__list .social__item .social__link::before {
 	float: left;
 	text-indent: 0;
+}
+
+.comments .comments__counter {
+	margin-bottom: 24px;
 }
 
 .comments .comments__list .children {

@@ -1,5 +1,7 @@
 .comments {
 	.comments__counter {
+		@extend %section-title;
+		margin-bottom: $unit3;
 	}
 	.comments__list {
 		.children {
