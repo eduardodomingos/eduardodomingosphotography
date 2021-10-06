@@ -1,7 +1,7 @@
 .widget {
-	.sidebar & {
+	.site-sidebar & {
 		.widget__title {
-			text-transform: uppercase;
+			@extend %section-title;
 			font-size: 17px;
 			margin-bottom: $unit3;
 		}

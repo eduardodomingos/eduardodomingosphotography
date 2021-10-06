@@ -48,10 +48,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 @import "components/icons";
 @import "components/section";
 @import "components/container";
-@import "components/header";
-@import "components/content";
-@import "components/sidebar";
-@import "components/footer";
+@import "components/site-header";
+@import "components/site-content";
+@import "components/site-main";
+@import "components/site-sidebar";
+@import "components/site-footer";
 @import "components/search-form";
 @import "components/hero";
 @import "components/post-listing";
