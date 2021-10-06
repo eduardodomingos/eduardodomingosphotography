@@ -1,23 +1,28 @@
 .comments {
+	.comment-respond__title,
 	.comments__counter {
 		@extend %section-title;
 		margin-bottom: $unit3;
 	}
 	.comments__list {
+		margin-bottom: $unit6;
 		.children {
 			margin-left: $unit4;
 		}
 		.comment {
 			.comment__body {
 				position: relative;
-				padding-left: 32px + 1.5 * $unit1;
+				padding: $unit2;
+				padding-left: $unit2 + 32px + 1.5 * $unit1;
+				//padding-left: 32px + 1.5 * $unit1;
 				min-height: 32px;
 				margin-bottom: $unit2;
+				background: $color10;
 				.avatar {
 					@include circle(32px);
 					position: absolute;
-					left: 0;
-					top: 0;
+					left: $unit2;
+					top: $unit2;
 				}
 				.comment__author {
 					font-weight: bold;
@@ -29,6 +34,14 @@
 					opacity: 0.8;
 					margin-bottom: $unit1;
 				}
+				.comment__awaiting-moderation {
+					background: lighten($color10, 10%);
+					display: inline-block;
+					padding: $unit2;
+					font-style: normal;
+					border-left: 3px solid $color__attention;
+					margin-bottom: $unit2;
+				}
 				.comment__content {
 					margin-bottom: $unit2;
 				}
@@ -38,15 +51,18 @@
 			}
 			&.bypostauthor {
 				.comment__body {
-					padding: $unit2;
-					padding-left: $unit2 + 32px + 1.5 * $unit1;
-					background: $color10;
-					.avatar {
-						left: $unit2;
-						top: $unit2;
-					}
+					background: $color13;
+					border-left: 3px solid $color__primary;
 				}
 			}
+		}
+	}
+	.comment-respond__form {
+		> *:not(:last-child) {
+			margin-bottom: $unit3;
+		}
+		label {
+			font-weight: 500;
 		}
 	}
 }

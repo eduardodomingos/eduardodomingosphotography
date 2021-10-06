@@ -17,11 +17,12 @@ class Custom_Walker_Comment extends Walker_Comment {
 		$commenter          = wp_get_current_commenter();
 		$show_pending_links = ! empty( $commenter['comment_author'] );
 
-		if ( $commenter['comment_author_email'] ) {
-			$moderation_note = __( 'Your comment is awaiting moderation.' );
-		} else {
-			$moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.' );
-		}
+		// if ( $commenter['comment_author_email'] ) {
+		// 	$moderation_note = __( 'Your comment is awaiting moderation.' );
+		// } else {
+		// 	$moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.' );
+		// }
+        $moderation_note = __( 'Your comment is awaiting moderation.' );
 		?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
 			<div id="div-comment-<?php comment_ID(); ?>" class="comment__body">

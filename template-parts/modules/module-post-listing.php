@@ -41,7 +41,7 @@ if($list_type === 'latest') {
                 <h2 class="section__title"><?php echo $title; ?></h2>
             <?php endif; ?>
             <?php if($link_label && $link_url): ?>
-                <a class="section__link button button--secondary" href="<?php echo esc_url($link_url); ?>"><?php echo $link_label; ?></a>
+                <a class="section__link button button--secondary" href="<?php echo esc_url($link_url); ?>">+ <?php echo $link_label; ?></a>
             <?php endif; ?>
         </div>
         <?php if($description): ?>
