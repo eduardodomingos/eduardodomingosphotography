@@ -39,20 +39,44 @@
 		}
 	}
 
-	.post-listing__list--2up & {
-		@include mq($from: desktop) {
-			position: relative;
-			padding-left: $teaser__thumbnail-width + $unit3;
-			min-height: $teaser__thumbnail-width * 2/3;
+	&.teaser--single {
+		.teaser__title {
+			@extend %post-title;
+		}
+		.teaser__summary {
+			font-size: 16px;
+		}
+		.teaser__thumbnail {
+			img {
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
+			}
+		}
+		@include mq($from: tablet) {
+			display: flex;
+			> div {
+				padding: $unit4;
+			}
 			.teaser__thumbnail {
-				width: $teaser__thumbnail-width;
-				position: absolute;
-				top: 0;
-				left: 0;
+				width: 50%;
+				flex-shrink: 0;
 				margin-bottom: 0;
 			}
 		}
 	}
+
+	&.teaser--secondary {
+		@include mq($from: desktop) {
+			display: flex;
+			.teaser__thumbnail {
+				width: $teaser__thumbnail-width;
+				flex-shrink: 0;
+				margin-bottom: 0;
+				margin-right: $unit3;
+			}
+		}
+	}
+
 	.site-sidebar & {
 		position: relative;
 		padding-left: $teaser__thumbnail-width--sidebar + $unit2;

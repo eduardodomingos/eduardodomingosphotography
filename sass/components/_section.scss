@@ -14,6 +14,14 @@
 .section {
 	padding-top: $unit6;
 	padding-bottom: $unit6;
+	&.section--grey {
+		background: $color10;
+	}
+	&.section--white + .section--white,
+	&.section--grey + .section--grey {
+		padding-top: 0;
+	}
+
 	.section__header {
 		margin-bottom: $unit3;
 		> div {
@@ -26,7 +34,7 @@
 				height: 1px;
 				width: 100%;
 				background-color: $color9;
-				margin: 0 $unit2;
+				margin-left: $unit2;
 				order: 2;
 			}
 		}
@@ -42,6 +50,7 @@
 		order: 3;
 		flex-shrink: 0;
 		min-width: 150px;
+		margin-left: $unit2;
 		@include mq($until: tablet) {
 			display: none;
 		}

@@ -1,3 +1,10 @@
+%post-title {
+	font-size: 28px;
+	@include mq($from: desktop) {
+		font-size: 35px;
+	}
+}
+
 .post {
 	.post__header {
 		margin-bottom: $unit5;
@@ -15,11 +22,10 @@
 			}
 		}
 		.post__title {
+			@extend %post-title;
 			text-transform: none;
-			font-size: 28px;
 			margin-bottom: $unit2;
 			@include mq($from: desktop) {
-				font-size: 35px;
 				margin-bottom: $unit3;
 			}
 		}

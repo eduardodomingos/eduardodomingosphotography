@@ -98,3 +98,8 @@ add_filter( 'term_links-post_tag', function ( $links )
 
     return $links;
 });
+
+/*
+ * Get rid of archive title prefix
+*/
+add_filter('get_the_archive_title_prefix','__return_false');

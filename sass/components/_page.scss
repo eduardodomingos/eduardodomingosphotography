@@ -1,0 +1,9 @@
+.page__header {
+	.page__title {
+		@extend %section-title;
+		font-size: 28px;
+		@include mq($from: desktop) {
+			font-size: 30px;
+		}
+	}
+}
