@@ -215,3 +215,8 @@ require get_template_directory() . "/widgets/recent-posts-enhanced.php";
  * Modules for this theme.
  */
 require get_template_directory() . '/inc/modules.php';
+
+/**
+ * Load Custom Comments Layout file.
+ */
+require get_template_directory() . '/inc/walker-comment.php';

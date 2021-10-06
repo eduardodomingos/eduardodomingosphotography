@@ -20,13 +20,14 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="comments-area">
+<section class="comments">
 
 	<?php
 	// You can start editing here -- including this comment!
 	if ( have_comments() ) :
 		?>
-		<h2 class="comments-title">
+		<h2 class="screen-reader-text">Comentários</h2>
+		<p class="comments__counter">
 			<?php
 			$edp_comment_count = get_comments_number();
 			if ( '1' === $edp_comment_count ) {
@@ -44,16 +45,17 @@ if ( post_password_required() ) {
 				);
 			}
 			?>
-		</h2><!-- .comments-title -->
+		</p>
 
 		<?php the_comments_navigation(); ?>
 
-		<ol class="comment-list">
+		<ol class="comments__list">
 			<?php
 			wp_list_comments(
 				array(
 					'style'      => 'ol',
 					'short_ping' => true,
+					'walker' =>  new Custom_Walker_Comment()
 				)
 			);
 			?>
@@ -74,4 +76,4 @@ if ( post_password_required() ) {
 	comment_form();
 	?>
 
-</div><!-- #comments -->
+</section>

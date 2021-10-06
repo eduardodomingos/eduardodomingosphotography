@@ -1,0 +1,50 @@
+.comments {
+	.comments__counter {
+	}
+	.comments__list {
+		.children {
+			margin-left: $unit4;
+		}
+		.comment {
+			.comment__body {
+				position: relative;
+				padding-left: 32px + 1.5 * $unit1;
+				min-height: 32px;
+				margin-bottom: $unit2;
+				.avatar {
+					@include circle(32px);
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+				.comment__author {
+					font-weight: bold;
+				}
+				.comment__date {
+					display: block;
+					@extend %link-silent;
+					font-size: 90%;
+					opacity: 0.8;
+					margin-bottom: $unit1;
+				}
+				.comment__content {
+					margin-bottom: $unit2;
+				}
+				.comment__reply a {
+					text-decoration: none;
+				}
+			}
+			&.bypostauthor {
+				.comment__body {
+					padding: $unit2;
+					padding-left: $unit2 + 32px + 1.5 * $unit1;
+					background: $color10;
+					.avatar {
+						left: $unit2;
+						top: $unit2;
+					}
+				}
+			}
+		}
+	}
+}

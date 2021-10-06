@@ -328,7 +328,7 @@ h2 > a,
 h3 > a,
 h4 > a,
 h5 > a,
-h6 > a, .teaser .teaser__category a, .post .post__header .post__category a, .post .post__header .post__meta .post__author a {
+h6 > a, .teaser .teaser__category a, .post .post__header .post__category a, .post .post__header .post__meta .post__author a, .comments .comments__list .comment .comment__body .comment__date {
 	text-decoration: none;
 	color: #002333;
 }
@@ -339,19 +339,19 @@ h2 > a:hover,
 h3 > a:hover,
 h4 > a:hover,
 h5 > a:hover,
-h6 > a:hover, .teaser .teaser__category a:hover, .post .post__header .post__category a:hover, .post .post__header .post__meta .post__author a:hover, a.link--silent:active,
+h6 > a:hover, .teaser .teaser__category a:hover, .post .post__header .post__category a:hover, .post .post__header .post__meta .post__author a:hover, .comments .comments__list .comment .comment__body .comment__date:hover, a.link--silent:active,
 .link.link--silent:active, h1 > a:active,
 h2 > a:active,
 h3 > a:active,
 h4 > a:active,
 h5 > a:active,
-h6 > a:active, .teaser .teaser__category a:active, .post .post__header .post__category a:active, .post .post__header .post__meta .post__author a:active, a.link--silent:focus,
+h6 > a:active, .teaser .teaser__category a:active, .post .post__header .post__category a:active, .post .post__header .post__meta .post__author a:active, .comments .comments__list .comment .comment__body .comment__date:active, a.link--silent:focus,
 .link.link--silent:focus, h1 > a:focus,
 h2 > a:focus,
 h3 > a:focus,
 h4 > a:focus,
 h5 > a:focus,
-h6 > a:focus, .teaser .teaser__category a:focus, .post .post__header .post__category a:focus, .post .post__header .post__meta .post__author a:focus {
+h6 > a:focus, .teaser .teaser__category a:focus, .post .post__header .post__category a:focus, .post .post__header .post__meta .post__author a:focus, .comments .comments__list .comment .comment__body .comment__date:focus {
 	color: #ec008c;
 }
 
@@ -1264,6 +1264,56 @@ img {
 .social__list .social__item .social__link::before {
 	float: left;
 	text-indent: 0;
+}
+
+.comments .comments__list .children {
+	margin-left: 32px;
+}
+
+.comments .comments__list .comment .comment__body {
+	position: relative;
+	padding-left: 44px;
+	min-height: 32px;
+	margin-bottom: 16px;
+}
+
+.comments .comments__list .comment .comment__body .avatar {
+	width: 32px;
+	height: 32px;
+	border-radius: 16px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.comments .comments__list .comment .comment__body .comment__author {
+	font-weight: bold;
+}
+
+.comments .comments__list .comment .comment__body .comment__date {
+	display: block;
+	font-size: 90%;
+	opacity: 0.8;
+	margin-bottom: 8px;
+}
+
+.comments .comments__list .comment .comment__body .comment__content {
+	margin-bottom: 16px;
+}
+
+.comments .comments__list .comment .comment__body .comment__reply a {
+	text-decoration: none;
+}
+
+.comments .comments__list .comment.bypostauthor .comment__body {
+	padding: 16px;
+	padding-left: 60px;
+	background: #f7f8f9;
+}
+
+.comments .comments__list .comment.bypostauthor .comment__body .avatar {
+	left: 16px;
+	top: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */
